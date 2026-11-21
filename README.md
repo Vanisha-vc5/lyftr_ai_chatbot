@@ -154,9 +154,9 @@ Or run the whole contract in one go: `make smoke BASE_URL=$B` (or `python script
 
 ## Setup Used: your editor and AI tools
 
-- Editor: `<EDITOR>`
-- AI tools: `<AI_TOOLS>`
-- Model: `<MODEL>`
+- Editor: Visual Studio Code (Windows 11)
+- AI tools: Claude Code (VS Code extension) for implementation, tests, Docker and deployment debugging
+- Model: Claude Opus 5.5
 
 ## Bonus features (if any): what you added beyond the requirements and why
 
