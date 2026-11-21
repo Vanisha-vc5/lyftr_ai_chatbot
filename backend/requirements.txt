@@ -1,0 +1,8 @@
+# LiteLLM is pinned to 1.108.14: the disk cache backend was removed in 1.109+.
+# fastapi/orjson/soundfile are also needed by LiteLLM's lazily imported cache-hit path.
+litellm[caching]==1.108.14
+fastapi==0.165.0
+uvicorn[standard]==0.54.0
+pydantic-settings==2.16.3
+orjson==3.13.0
+soundfile==0.14.0
