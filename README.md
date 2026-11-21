@@ -96,7 +96,7 @@ All configuration comes from environment variables. [`.env.example`](.env.exampl
 - A logging filter redacts configured keys and any `gsk_…` pattern.
 - Every error is JSON (`detail`), with a catch-all `500 {"detail":"internal server error"}`.
 - FastAPI docs are off by default (`ENABLE_API_DOCS`), so only the three contract endpoints are exposed.
-- The container runs as a non-root user (`vani`, uid 10001). Railway mounts volumes owned by root, so the Railway service sets `RAILWAY_RUN_UID=0`.
+- The app runs as a non-root user (`vani`, uid 10001). Railway mounts volumes owned by root, so the entrypoint starts as root only long enough to `chown /data`, then drops privileges with `setpriv`. No platform-specific setting is needed.
 
 ### Trade-offs and what would change at scale
 

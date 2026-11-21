@@ -11,13 +11,15 @@ FROM python:3.12-slim AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PATH=/opt/venv/bin:$PATH
-# Non-root user. On Railway, volumes are mounted owned by root: set RAILWAY_RUN_UID=0 there.
+# The app runs as the non-root "vani" user. The entrypoint starts as root only to
+# chown /data (Railway mounts volumes owned by root), then drops privileges.
 RUN useradd --uid 10001 --create-home --shell /usr/sbin/nologin vani \
     && mkdir -p /data/litellm_cache && chown -R vani:vani /data
 COPY --from=builder /opt/venv /opt/venv
 WORKDIR /srv
 COPY app ./app
-USER vani
+COPY --chmod=755 docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
   CMD python -c "import os,urllib.request; urllib.request.urlopen(f'http://127.0.0.1:{os.environ.get(\"PORT\",\"8000\")}/health', timeout=4)" || exit 1
