@@ -1,8 +1,8 @@
 # Vani demo script (2–3 minutes)
 
 **Before recording:**
-- Open two browser tabs: the live UI (`<FRONTEND_URL>`) and `<BACKEND_URL>/health`.
-- Open a terminal with `B=<BACKEND_URL>` exported.
+- Open two browser tabs: the live UI (https://lyftr-ai-chatbot-sage.vercel.app) and https://lyftraichatbot-production.up.railway.app/health.
+- Open a terminal with `B=https://lyftraichatbot-production.up.railway.app` exported.
 - Pick a question you haven't asked before. The cache persists, so a question that's already been asked would show `LLM_CACHE` on the first try. Adding a word like "today" or a number makes it new.
 
 | Time | Do | Say |

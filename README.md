@@ -9,10 +9,10 @@
 
 | What | URL |
 |---|---|
-| Frontend (Vercel) | `<FRONTEND_URL>` |
-| Backend (Railway) | `<BACKEND_URL>` |
-| Health check | `<BACKEND_URL>/health` |
-| Repository | `<REPO_URL>` |
+| Frontend (Vercel) | https://lyftr-ai-chatbot-sage.vercel.app |
+| Backend (Railway) | https://lyftraichatbot-production.up.railway.app |
+| Health check | https://lyftraichatbot-production.up.railway.app/health |
+| Repository | https://github.com/Vanisha-vc5/lyftr_ai_chatbot |
 | Demo video | `<DEMO_VIDEO_URL>` |
 
 The deployed backend has `ENABLE_FAILURE_SIMULATION=true`, so the `X-Simulate-Failure` header works on the live URL.
@@ -106,7 +106,7 @@ All configuration comes from environment variables. [`.env.example`](.env.exampl
 
 ## Verification: how to see failover, cache hits and per-message token usage
 
-Set `B=<BACKEND_URL>` (or `B=http://localhost:8000`).
+Set `B=https://lyftraichatbot-production.up.railway.app` (or `B=http://localhost:8000`).
 
 ```bash
 # Health: 2 keys, cache on
@@ -150,7 +150,7 @@ Or run the whole contract in one go: `make smoke BASE_URL=$B` (or `python script
 - Each assistant reply has a meta bar. It shows the source pill (`LIVE_INFERENCE` in blue, `LLM_CACHE` in green), the model, the latency, `in N · out M` tokens, the key that answered, and `↻ 1 fallback` when failover happened.
 - To see a cache hit, click **New chat** and send the same first message again.
 - The **Failover Lab** dropdown sends `X-Simulate-Failure` on the next message only. Choosing `key_1 = 429` shows a key_2 answer; choosing **Fail all keys** shows a readable 503 error bubble with a Retry button.
-- `scripts/ui_check.py <FRONTEND_URL>` drives all of this in headless Chromium and checks every `data-testid`.
+- `python scripts/ui_check.py https://lyftr-ai-chatbot-sage.vercel.app` drives all of this in headless Chromium and checks every `data-testid`.
 
 ## Setup Used: your editor and AI tools
 
