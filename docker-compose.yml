@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: ./backend
+    env_file: .env
+    environment:
+      DATABASE_URL: sqlite:////data/app.db
+      CACHE_DIR: /data/litellm_cache
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:3000}
+      PORT: "8000"
+    ports: ["${BACKEND_PORT:-8000}:8000"]
+    volumes: ["vani_data:/data"]
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    environment:
+      API_BASE_URL: ${API_BASE_URL:-http://localhost:8000}
+    ports: ["${FRONTEND_PORT:-3000}:3000"]
+    depends_on: [backend]
+    restart: unless-stopped
+volumes:
+  vani_data:
